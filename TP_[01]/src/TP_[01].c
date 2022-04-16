@@ -22,7 +22,6 @@ int main(void)
 
 	float diferenciaPrecios;
 
-	int error = 0;
 	const float porcentajeDebito = 10;
 	const float porcentajeCredito = 25;
 	const float valorBitcoin = 4606954.55;
@@ -33,38 +32,29 @@ int main(void)
 	GetFloat("\n Ingresar Kilómetros: ",-1,0,9999999,"\n El número ingresado no cumple con los parametros.\n Ingrese un valor mayor a cero.",&kilometros);
 
 	//Ingresando precios.
-	printf("\n Ingresar Precio de Vuelos");
+	printf("\n Ingresar Precio de Vuelos\n");
 	GetFloat(" - Precio vuelo Aerolíneas: ",-1,0,9999999,"\n El número ingresado no cumple con los parametros.\n Ingrese un valor mayor a cero.",&precioVueloAerolineas);
 	GetFloat(" - Precio vuelo Latam: ",-1,0,9999999,"\n El número ingresado no cumple con los parametros.\n Ingrese un valor mayor a cero.",&precioVueloLatam);
-	system("cls");//Limpiando pantalla.
+	//system("cls");//Limpiando pantalla.
 
 	//Calculando descuentos de tarjeta de debito.
-	error = DescuentoIntereses(&precioAerolineasDebito,precioVueloAerolineas,porcentajeDebito,descuentoDebito);
-	if (error != 0) { printf("\n Error [precioAerolineasDebito]"); error = 0; }
-	error = DescuentoIntereses(&precioLatamDebito,precioVueloLatam,porcentajeDebito,descuentoDebito);
-	if (error != 0) { printf("\n Error [precioLatamDebito]"); error = 0; }
+	DescuentoIntereses(&precioAerolineasDebito,precioVueloAerolineas,porcentajeDebito,descuentoDebito);
+	DescuentoIntereses(&precioLatamDebito,precioVueloLatam,porcentajeDebito,descuentoDebito);
 
 	//Calculando intereses de tarjeta de credito.
-	error = DescuentoIntereses(&precioAerolineasCredito,precioVueloAerolineas,porcentajeCredito,interecesCredito);
-	if (error != 0) { printf("\n Error [precioAerolineasCredito]"); error = 0; }
-	error = DescuentoIntereses(&precioLatamCredito,precioVueloLatam,porcentajeCredito,interecesCredito);
-	if (error != 0) { printf("\n Error [precioLatamCredito]"); error = 0; }
+	DescuentoIntereses(&precioAerolineasCredito,precioVueloAerolineas,porcentajeCredito,interecesCredito);
+	DescuentoIntereses(&precioLatamCredito,precioVueloLatam,porcentajeCredito,interecesCredito);
 
 	//Convercion de pesos a bitcoin.
-	error = ConversorBitcoinUnitario(&precioAerolineasBitcoin,precioVueloAerolineas,valorBitcoin);
-	if (error != 0) { printf("\n Error [precioAerolineasBitcoin]"); error = 0; }
-	error = ConversorBitcoinUnitario(&precioLatamBitcoin,precioVueloLatam,valorBitcoin);
-	if (error != 0) { printf("\n Error [precioLatamBitcoin]"); error = 0; }
+	ConversorBitcoinUnitario(&precioAerolineasBitcoin,precioVueloAerolineas,valorBitcoin);
+	ConversorBitcoinUnitario(&precioLatamBitcoin,precioVueloLatam,valorBitcoin);
 
 	//Calculando precio unitario.
-	error = ConversorBitcoinUnitario(&precioAerolineasUnitario,precioVueloAerolineas,kilometros);
-	if (error != 0) { printf("\n Error [precioAerolineasUnitario]"); error = 0; }
-	error = ConversorBitcoinUnitario(&precioLatamUnitario,precioVueloLatam,kilometros);
-	if (error != 0) { printf("\n Error [precioLatamUnitario]"); error = 0; }
+	ConversorBitcoinUnitario(&precioAerolineasUnitario,precioVueloAerolineas,kilometros);
+	ConversorBitcoinUnitario(&precioLatamUnitario,precioVueloLatam,kilometros);
 
 	//Calculando diferencia de precios.
-	error = DiferenciaPrecios(&diferenciaPrecios,precioVueloLatam,precioVueloAerolineas);
-	if (error != 0) { printf("\n Error [precioLatamUnitario]"); error = 0; }
+	DiferenciaPrecios(&diferenciaPrecios,precioVueloLatam,precioVueloAerolineas);
 
 	//Mostrando datos obtenidos.
 	printf("\n KMs ingresados: %.2f km\n",kilometros);
